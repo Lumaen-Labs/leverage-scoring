@@ -1,12 +1,9 @@
 use axum::Router;
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 mod config;
 mod routes;
 mod handlers;
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
-
-// mod solana_client;
-// mod error;
 
 #[tokio::main]
 async fn main() {
@@ -18,15 +15,20 @@ async fn main() {
         .with(tracing_subscriber::fmt::layer())
         .init();
 
+    // load environment variables
     let cfg = config::Config::from_env();
 
     let app = Router::new().merge(routes::binance_routes());
 
-    // run it
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
+    // bind to Render-compatible host and port
+    let addr = format!("0.0.0.0:{}", cfg.port);
+    let listener = tokio::net::TcpListener::bind(&addr)
         .await
-        .unwrap();
-    println!("🚀 Server running on http://127.0.0.1:3000");
+        .expect("Failed to bind to address");
 
-    axum::serve(listener, app).await.unwrap();
+    tracing::info!("🚀 Server running on http://{}", addr);
+
+    axum::serve(listener, app)
+        .await
+        .expect("Server crashed unexpectedly");
 }

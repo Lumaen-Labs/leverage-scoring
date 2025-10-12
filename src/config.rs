@@ -14,7 +14,10 @@ impl Config {
         Self {
             rpc_url: env::var("SOLANA_RPC_URL").unwrap_or_else(|_| "https://api.mainnet-beta.solana.com".to_string()),
             keypair_path: env::var("SOLANA_KEYPAIR").unwrap_or_else(|_| "./id.json".to_string()),
-            port: env::var("PORT").unwrap_or_else(|_| "8080".to_string()).parse().unwrap(),
+            port: env::var("PORT")
+                .unwrap_or_else(|_| "10000".to_string())
+                .parse()
+                .unwrap_or(10000),
         }
     }
 }

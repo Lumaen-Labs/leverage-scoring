@@ -1,1 +1,72 @@
-/target
+# -------------------------------
+# Rust & Cargo
+# -------------------------------
+/target/
+/Cargo.lock
+**/*.rs.bk
+
+# Incremental compilation files
+/.rustc_info.json
+
+# -------------------------------
+# Build Artifacts
+# -------------------------------
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# -------------------------------
+# Logs
+# -------------------------------
+logs/
+*.log
+
+# -------------------------------
+# Environment & Config
+# -------------------------------
+.env
+.env.*
+!.env.example
+
+# -------------------------------
+# Editor & IDE files
+# -------------------------------
+# VS Code
+.vscode/
+.history/
+
+# IntelliJ / CLion
+.idea/
+
+# Emacs / Vim / etc.
+*~
+*.swp
+*.swo
+
+# -------------------------------
+# OS Specific
+# -------------------------------
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# -------------------------------
+# Deployment & CI/CD
+# -------------------------------
+# Docker
+docker-compose.override.yml
+*.pid
+/tmp/
+
+# Render / Cloud Build Artifacts
+/render.yaml
+/dist/
