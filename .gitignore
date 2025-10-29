@@ -70,3 +70,5 @@ docker-compose.override.yml
 # Render / Cloud Build Artifacts
 /render.yaml
 /dist/
+
+/id.json

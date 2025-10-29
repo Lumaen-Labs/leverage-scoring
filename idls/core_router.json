@@ -1,0 +1,269 @@
+{
+  "address": "6LYZABZVnMXxD7R1vzf9sjA9SbRMEkb13cuF7PPN6DRj",
+  "metadata": {
+    "name": "core_router",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "get_credit_score",
+      "discriminator": [
+        215,
+        124,
+        216,
+        24,
+        94,
+        36,
+        81,
+        174
+      ],
+      "accounts": [
+        {
+          "name": "credit_score_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  114,
+                  101,
+                  100,
+                  105,
+                  116,
+                  95,
+                  115,
+                  99,
+                  111,
+                  114,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "credit_score_account.user",
+                "account": "CreditScoreAccount"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [],
+      "returns": "u16"
+    },
+    {
+      "name": "update_credit_score",
+      "discriminator": [
+        42,
+        42,
+        117,
+        96,
+        130,
+        201,
+        223,
+        168
+      ],
+      "accounts": [
+        {
+          "name": "credit_score_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  114,
+                  101,
+                  100,
+                  105,
+                  116,
+                  95,
+                  115,
+                  99,
+                  111,
+                  114,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "user_pubkey"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "user_pubkey",
+          "type": "pubkey"
+        },
+        {
+          "name": "new_score",
+          "type": "u16"
+        },
+        {
+          "name": "proof_hash",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "expiry",
+          "type": "i64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "CreditScoreAccount",
+      "discriminator": [
+        188,
+        195,
+        25,
+        51,
+        13,
+        10,
+        196,
+        230
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "DepositTooSmall",
+      "msg": "Deposit amount below minimum threshold"
+    },
+    {
+      "code": 6001,
+      "name": "DepositTooLarge",
+      "msg": "Deposit amount exceeds maximum allowed"
+    },
+    {
+      "code": 6002,
+      "name": "BorrowTooSmall",
+      "msg": "Borrow amount below minimum threshold"
+    },
+    {
+      "code": 6003,
+      "name": "BorrowTooLarge",
+      "msg": "Borrow amount exceeds maximum allowed"
+    },
+    {
+      "code": 6004,
+      "name": "InsufficientLiquidity",
+      "msg": "Insufficient liquidity in supply vault"
+    },
+    {
+      "code": 6005,
+      "name": "LTVExceeded",
+      "msg": "Loan-to-Value ratio exceeds maximum allowed"
+    },
+    {
+      "code": 6006,
+      "name": "UnhealthyPosition",
+      "msg": "Health factor below liquidation threshold"
+    },
+    {
+      "code": 6007,
+      "name": "InsufficientCollateral",
+      "msg": "Not enough unlocked collateral"
+    },
+    {
+      "code": 6008,
+      "name": "InvalidLoan",
+      "msg": "Loan does not exist or not owned by user"
+    },
+    {
+      "code": 6009,
+      "name": "MathOverflow",
+      "msg": "Mathematical overflow occurred"
+    },
+    {
+      "code": 6010,
+      "name": "MarketPaused",
+      "msg": "Market is paused"
+    },
+    {
+      "code": 6011,
+      "name": "InsufficientFreeRTokens",
+      "msg": "Insufficient free rTokens to lock"
+    },
+    {
+      "code": 6012,
+      "name": "WithdrawLimitExceeded",
+      "msg": "Withdraw exceeds daily limit (20% of reserves)"
+    },
+    {
+      "code": 6013,
+      "name": "InvalidMarket",
+      "msg": "Invalid market for the given asset"
+    },
+    {
+      "code": 6014,
+      "name": "Unauthorized",
+      "msg": "Unauthorized"
+    },
+    {
+      "code": 6015,
+      "name": "RepayAmountTooSmall",
+      "msg": "Repay amount exceeds outstanding borrow"
+    }
+  ],
+  "types": [
+    {
+      "name": "CreditScoreAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "score",
+            "type": "u16"
+          },
+          {
+            "name": "proof_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "last_updated",
+            "type": "i64"
+          },
+          {
+            "name": "expiry",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}

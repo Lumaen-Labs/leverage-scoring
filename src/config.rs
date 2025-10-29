@@ -5,6 +5,7 @@ pub struct Config {
     pub rpc_url: String,
     pub keypair_path: String,
     pub port: u16,
+    pub credit_score_program_id: String,
 }
 
 impl Config {
@@ -18,6 +19,7 @@ impl Config {
                 .unwrap_or_else(|_| "10000".to_string())
                 .parse()
                 .unwrap_or(10000),
+            credit_score_program_id: env::var("CREDIT_SCORE_PROGRAM_ID").unwrap_or_else(|_| "5M7DFNUwLpR3eFvCMuKpukVNx6W6fQXz9hHYB8SxG7uy".to_string()),
         }
     }
 }
