@@ -135,7 +135,8 @@ pub async fn fetch_data(
                 {
                     let mut proofs = state.proof_store.write().unwrap();
                     proofs
-                        .entry(recovered_hex.clone())
+                        .entry("9cMNcU1N9MbwiPDU3WKgxVh6msSZFmKoaMeATfyvdv1b".to_string())
+                        // .entry(recovered_hex.clone())
                         .or_insert_with(Vec::new)
                         .push(verified_proof);
                 }
